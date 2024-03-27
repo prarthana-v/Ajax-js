@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+    
+    <section>
+        <div class="container">
+            <h1 class="text-center text-uppercase pt-5 text-danger fw-normal">Products</h1>
+        </div>
+        <div id="product" class="row">
+            
+        </div>
+    </section>
+</body>
+</html>
+<script>
+    fetch(`https://dummyjson.com/products`)
+    .then(response => response.json())
+    .then(data => {
+        let tbl="";
+        console.log(data);
+        data.products.map((item)=>{
+           return  tbl += `
+           <div class="col-md-3 py-3 px-4">
+                <div class="card" style="width: 100%;height: 100%;">
+                    <img src="${item.images[0]}" class="card-img-top py-2" style="width: 100%;height: 400px;object-fit:contain;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+           `
+                
+            
+        })
+        document.getElementById("product").innerHTML = tbl;
+    })
+    .catch((error)=>{
+        console.warn("Error");
+    })
+</script>
